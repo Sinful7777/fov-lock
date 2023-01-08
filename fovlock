@@ -49,7 +49,7 @@ getgenv().Aiming = {
     Selected = nil,
     SelectedPart = nil,
 
-    TargetPart = {"Head", "HumanoidRootPart", "UpperTorso", "LowerTorso"},
+    TargetPart = {"Head","UpperTorso","HumanoidRootPart},
 
     Ignored = {
         Teams = {
@@ -131,88 +131,6 @@ function Aiming.IsPartVisible(Part, PartDescendant)
             return Visible
         end
     end
-
-    -- // Return
-    return false
-end
-
--- // Ignore player
-function Aiming.IgnorePlayer(Player)
-    -- // Vars
-    local Ignored = Aiming.Ignored
-    local IgnoredPlayers = Ignored.Players
-
-    -- // Find player in table
-    for _, IgnoredPlayer in ipairs(IgnoredPlayers) do
-        -- // Make sure player matches
-        if (IgnoredPlayer == Player) then
-            return false
-        end
-    end
-
-    -- // Blacklist player
-    tableinsert(IgnoredPlayers, Player)
-    return true
-end
-
--- // Unignore Player
-function Aiming.UnIgnorePlayer(Player)
-    -- // Vars
-    local Ignored = Aiming.Ignored
-    local IgnoredPlayers = Ignored.Players
-
-    -- // Find player in table
-    for i, IgnoredPlayer in ipairs(IgnoredPlayers) do
-        -- // Make sure player matches
-        if (IgnoredPlayer == Player) then
-            -- // Remove from ignored
-            tableremove(IgnoredPlayers, i)
-            return true
-        end
-    end
-
-    -- //
-    return false
-end
-
--- // Ignore team
-function Aiming.IgnoreTeam(Team, TeamColor)
-    -- // Vars
-    local Ignored = Aiming.Ignored
-    local IgnoredTeams = Ignored.Teams
-
-    -- // Find team in table
-    for _, IgnoredTeam in ipairs(IgnoredTeams) do
-        -- // Make sure team matches
-        if (IgnoredTeam.Team == Team and IgnoredTeam.TeamColor == TeamColor) then
-            return false
-        end
-    end
-
-    -- // Ignore team
-    tableinsert(IgnoredTeams, {Team, TeamColor})
-    return true
-end
-
--- // Unignore team
-function Aiming.UnIgnoreTeam(Team, TeamColor)
-    -- // Vars
-    local Ignored = Aiming.Ignored
-    local IgnoredTeams = Ignored.Teams
-
-    -- // Find team in table
-    for i, IgnoredTeam in ipairs(IgnoredTeams) do
-        -- // Make sure team matches
-        if (IgnoredTeam.Team == Team and IgnoredTeam.TeamColor == TeamColor) then
-            -- // Remove
-            tableremove(IgnoredTeams, i)
-            return true
-        end
-    end
-
-    -- // Return
-    return false
-end
 
 -- //  Toggle team check
 function Aiming.TeamCheck(Toggle)
@@ -436,5 +354,3 @@ end)
 
 -- //
 return Aiming
-
--- // If you want the examples, look at the docs.

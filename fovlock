@@ -1,35 +1,37 @@
 if getgenv().Aiming then return getgenv().Aiming end
-local Players = game:GetService("Players")
+                local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
-local GuiService = game:GetService("GuiService")
-local RunService = game:GetService("RunService")
-
-local Heartbeat = RunService.Heartbeat
-local LocalPlayer = Players.LocalPlayer
-local CurrentCamera = Workspace.CurrentCamera
-local Mouse = LocalPlayer:GetMouse()
-
-local Drawingnew = Drawing.new
-local Color3fromRGB = Color3.fromRGB
-local Vector2new = Vector2.new
-local GetGuiInset = GuiService.GetGuiInset
-local Randomnew = Random.new
-local mathfloor = math.floor
-local CharacterAdded = LocalPlayer.CharacterAdded
-local CharacterAddedWait = CharacterAdded.Wait
-local WorldToViewportPoint = CurrentCamera.WorldToViewportPoint
+        local GuiService = game:GetService("GuiService")
+                local RunService = game:GetService("RunService")
+ local Heartbeat = RunService.Heartbeat
+    local LocalPlayer = Players.LocalPlayer
+        local CurrentCamera = Workspace.CurrentCamera
+            local Mouse = LocalPlayer:GetMouse()
+                local Drawingnew = Drawing.new
+                    local Color3fromRGB = Color3.fromRGB
+                    local Vector2new = Vector2.new
+                    local GetGuiInset = GuiService.GetGuiInset
+                    local Randomnew = Random.new
+                local mathfloor = math.floor
+            local CharacterAdded = LocalPlayer.CharacterAdded
+        local CharacterAddedWait = CharacterAdded.Wait
+    local WorldToViewportPoint = CurrentCamera.WorldToViewportPoint
 local RaycastParamsnew = RaycastParams.new
-local EnumRaycastFilterTypeBlacklist = Enum.RaycastFilterType.Blacklist
-local Raycast = Workspace.Raycast
-local GetPlayers = Players.GetPlayers
-local Instancenew = Instance.new
-local IsDescendantOf = Instancenew("Part").IsDescendantOf
-local FindFirstChildWhichIsA = Instancenew("Part").FindFirstChildWhichIsA
-local FindFirstChild = Instancenew("Part").FindFirstChild
-local tableremove = table.remove
+            local EnumRaycastFilterTypeBlacklist = Enum.RaycastFilterType.Blacklist
+                local Raycast = Workspace.Raycast
+                    local GetPlayers = Players.GetPlayers
+                    local Instancenew = Instance.new
+                    local IsDescendantOf = Instancenew("Part").IsDescendantOf
+                local FindFirstChildWhichIsA = Instancenew("Part").FindFirstChildWhichIsA
+            local FindFirstChild = Instancenew("Part").FindFirstChild
+        local tableremove = table.remove
 local tableinsert = table.insert
-
 getgenv().Aiming = {
+
+
+
+--// fuck all you monkey niggers this the big slurrins fov
+
     Enabled = true,
 
     ShowFOV = false,
@@ -67,8 +69,7 @@ circle.Color = Aiming.FOVColour
 circle.Filled = false
 Aiming.FOVCircle = circle
 function Aiming.UpdateFOV()
-
-    if not (circle) then
+if not (circle) then
         return
     end
 
@@ -77,7 +78,6 @@ function Aiming.UpdateFOV()
     circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
     circle.NumSides = Aiming.FOVSides
     circle.Color = Aiming.FOVColour
-
     return circle
 end
 local CalcChance = function(percentage)
@@ -197,12 +197,8 @@ function Aiming.Raycast(Origin, Destination, UnitMultiplier)
             return Direction, Normal, Material
         end
     end
-
-
-    return nil
+ return nil
 end
-
-
 function Aiming.Character(Player)
     return Player.Character
 end
@@ -211,12 +207,8 @@ function Aiming.CheckHealth(Player)
     -- // Get Humanoid
     local Character = Aiming.Character(Player)
     local Humanoid = FindFirstChildWhichIsA(Character, "Humanoid")
-
-
     local Health = (Humanoid and Humanoid.Health or 0)
-
-
-    return Health > 0
+return Health > 0
 end
 function Aiming.Check()
     return (Aiming.Enabled == true and Aiming.Selected ~= LocalPlayer and Aiming.SelectedPart ~= nil)
@@ -226,8 +218,6 @@ Aiming.checkSilentAim = Aiming.Check
 
 function Aiming.GetClosestTargetPartToCursor(Character)
     local TargetParts = Aiming.TargetPart
-
-   
     local ClosestPart = nil
     local ClosestPartPosition = nil
     local ClosestPartOnScreen = false
@@ -238,7 +228,6 @@ function Aiming.GetClosestTargetPartToCursor(Character)
         if (typeof(TargetPart) == "string") then
             TargetPart = FindFirstChild(Character, TargetPart)
         end
-
         if not (TargetPart) then
             return
         end
@@ -267,19 +256,14 @@ function Aiming.GetClosestTargetPartToCursor(Character)
             CheckTargetPart(TargetParts)
         end
     end
-
-    -- //
     if (typeof(TargetParts) == "table") then
         for _, TargetPartName in ipairs(TargetParts) do
             CheckTargetPart(TargetPartName)
         end
     end
-
-    -- //
     return ClosestPart, ClosestPartPosition, ClosestPartOnScreen, ClosestPartMagnitudeFromMouse
 end
 function Aiming.GetClosestPlayerToCursor()
-    -- // Vars
     local TargetPart = nil
     local ClosestPlayer = nil
     local Chance = CalcChance(Aiming.HitChance)

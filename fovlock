@@ -1,8 +1,8 @@
 if getgenv().Aiming then return getgenv().Aiming end
-                local Players = game:GetService("Players")
+ local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
-        local GuiService = game:GetService("GuiService")
-                local RunService = game:GetService("RunService")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
  local Heartbeat = RunService.Heartbeat
     local LocalPlayer = Players.LocalPlayer
         local CurrentCamera = Workspace.CurrentCamera
@@ -29,8 +29,8 @@ local tableinsert = table.insert
 getgenv().Aiming = {
 
 
-
 --// fuck all you monkey niggers this the big slurrins fov
+
 
     Enabled = true,
 
@@ -214,8 +214,6 @@ function Aiming.Check()
     return (Aiming.Enabled == true and Aiming.Selected ~= LocalPlayer and Aiming.SelectedPart ~= nil)
 end
 Aiming.checkSilentAim = Aiming.Check
-
-
 function Aiming.GetClosestTargetPartToCursor(Character)
     local TargetParts = Aiming.TargetPart
     local ClosestPart = nil

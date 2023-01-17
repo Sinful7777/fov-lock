@@ -28,11 +28,9 @@ local RaycastParamsnew = RaycastParams.new
 local tableinsert = table.insert
 getgenv().Aiming = {
 
-
 --// fuck all you monkey niggers this the big slurrins fov
 
     Enabled = true,
-
     ShowFOV = true,
     FOV = 5.3,
     FOVSides = 8,

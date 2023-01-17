@@ -31,25 +31,17 @@ getgenv().Aiming = {
 
 --// fuck all you monkey niggers this the big slurrins fov
 
-
     Enabled = true,
 
     ShowFOV = true,
     FOV = 5.3,
-    FOVSides = 5,
-    FOVColour = Color3fromRGB(0, 0, 250),
-
+    FOVSides = 8,
+    FOVColour = Color3fromRGB(250, 250, 250),
     VisibleCheck = true,
-    
     HitChance = 100,
-
     Selected = nil,
     SelectedPart = nil,
-
-    TargetPart = {"Head", "UpperTorso", "HumanoidRootPart", "LowerTorso", "LeftHand", 
-    "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", 
-    "LeftFoot", "LeftLowerLeg",  "LeftUpperLeg", "RightLowerLeg", "RightFoot",  "RightUpperLeg"},
-
+    TargetPart = {"Head", "UpperTorso", "HumanoidRootPart", "LowerTorso", "LeftUpperArm", "RightUpperArm", "LeftUpperLeg", "RightUpperLeg"},
     Ignored = {
         Teams = {
             {
@@ -74,7 +66,6 @@ function Aiming.UpdateFOV()
 if not (circle) then
         return
     end
-
     circle.Visible = Aiming.ShowFOV
     circle.Radius = (Aiming.FOV * 3)
     circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
@@ -175,11 +166,9 @@ function Aiming.IsIgnored(Player)
     local Ignored = Aiming.Ignored
     local IgnoredPlayers = Ignored.Players
     for _, IgnoredPlayer in ipairs(IgnoredPlayers) do
-        -- // Check if Player Id
         if (typeof(IgnoredPlayer) == "number" and Player.UserId == IgnoredPlayer) then
             return true
         end
-        -- // Normal Player Instance
         if (IgnoredPlayer == Player) then
             return true
         end
@@ -206,7 +195,6 @@ function Aiming.Character(Player)
 end
 
 function Aiming.CheckHealth(Player)
-    -- // Get Humanoid
     local Character = Aiming.Character(Player)
     local Humanoid = FindFirstChildWhichIsA(Character, "Humanoid")
     local Health = (Humanoid and Humanoid.Health or 0)
@@ -224,7 +212,6 @@ function Aiming.GetClosestTargetPartToCursor(Character)
     local ClosestPartMagnitudeFromMouse = nil
     local ShortestDistance = 1/0
     local function CheckTargetPart(TargetPart)
-        -- // Convert string -> Instance
         if (typeof(TargetPart) == "string") then
             TargetPart = FindFirstChild(Character, TargetPart)
         end
@@ -271,7 +258,6 @@ function Aiming.GetClosestPlayerToCursor()
     if (not Chance) then
         Aiming.Selected = LocalPlayer
         Aiming.SelectedPart = nil
-
         return LocalPlayer
     end
     for _, Player in ipairs(GetPlayers(Players)) do

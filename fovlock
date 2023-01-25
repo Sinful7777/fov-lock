@@ -261,15 +261,6 @@ function Aiming.GetClosestTargetPartToCursor(Character)
     end
     return ClosestPart, ClosestPartPosition, ClosestPartOnScreen, ClosestPartMagnitudeFromMouse
 end
-function Aiming.GetClosestPlayerToCursor()
-    local TargetPart = nil
-    local ClosestPlayer = nil
-    local Chance = CalcChance(Aiming.HitChance)
-    local ShortestDistance = 1/0
-    if (not Chance) then
-        Aiming.Selected = LocalPlayer
-        Aiming.SelectedPart = nil
-
         return LocalPlayer
     end
     for _, Player in ipairs(GetPlayers(Players)) do

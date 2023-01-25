@@ -127,18 +127,6 @@ function Aiming.UnIgnorePlayer(Player)
     end
     return false
 end
-function Aiming.IgnoreTeam(Team, TeamColor)
-    local Ignored = Aiming.Ignored
-    local IgnoredTeams = Ignored.Teams
-    for _, IgnoredTeam in ipairs(IgnoredTeams) do
-        -- // Make sure team matches
-        if (IgnoredTeam.Team == Team and IgnoredTeam.TeamColor == TeamColor) then
-            return false
-        end
-    end
-    tableinsert(IgnoredTeams, {Team, TeamColor})
-    return true
-end
 function Aiming.UnIgnoreTeam(Team, TeamColor)
     local Ignored = Aiming.Ignored
     local IgnoredTeams = Ignored.Teams
@@ -155,18 +143,8 @@ function Aiming.TeamCheck(Toggle)
     if (Toggle) then
         return Aiming.IgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
     end
-
     return Aiming.UnIgnoreTeam(LocalPlayer.Team, LocalPlayer.TeamColor)
 end
-function Aiming.IsIgnoredTeam(Player)
-    local Ignored = Aiming.Ignored
-    local IgnoredTeams = Ignored.Teams
-    for _, IgnoredTeam in ipairs(IgnoredTeams) do
-        -- // Make sure team matches
-        if (Player.Team == IgnoredTeam.Team and Player.TeamColor == IgnoredTeam.TeamColor) then
-            return true
-        end
-    end
     return false
 end
 function Aiming.IsIgnored(Player)
